@@ -1,0 +1,54 @@
+version: "3.2"
+
+services:
+
+  vote:
+    image: bretfisher/examplevotingapp_vote
+    ports:
+      - "80:80"
+    networks:
+      - frontend
+    deploy:
+      replicas: 3
+
+  redis: 
+    image: redis:3.2
+    networks:
+      - frontend
+    deploy:
+      replicas: 1
+
+  worker:
+    image: bretfisher/examplevotingapp_worker
+    networks:
+      - frontend
+      - backend
+    deploy:
+      replicas: 1
+
+  db:
+    image: postgres:9.4
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - psql_vol:/var/lib/postgresql/data
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+
+  result:
+    image: bretfisher/examplevotingapp_result
+    ports:
+      - "5001:80"
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  psql_vol:
