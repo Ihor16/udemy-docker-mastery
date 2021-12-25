@@ -1,8 +1,8 @@
-M1:
+# M1:
 docker top mongo
 ps aux
 
-M2:
+# M2:
 docker inspect
 docker stats
 docker run -it
@@ -24,7 +24,7 @@ docker network create
 	docker run --rm -it <image> bash
 docker run -d --network <network-name> --network-alias <alias for a common dns name>
 
-M3:
+# M3:
 docker image history
 docker system df
 docker <system,image,container> prune (-a)
@@ -37,12 +37,12 @@ docker <system,image,container> prune (-a)
 	EXPOSE
 	CMD
 
-M4:
+# M4:
 docker volume ls
 docker run ... -v name:<path in container (may be specified in the Dockerfile)>
 docker run ... -v $(pwd):<path in container>
 
-M4:
+# M4:
 docker-compose up
 docker-compose down
 docker-compose down -v
@@ -71,7 +71,7 @@ build: .
 	context: .
 	dockerfile: <file-name>
 
-M5:
+# M5:
 "Check if swarm is enabled"
 docker info -> look for Swarm: <inactive>
 docker swarm init
@@ -111,8 +111,9 @@ echo "text" | docker secret create <secret-name> -
 	file:./<file>
 PASS_FILE: /run/secrets/<secret-name>
 
-M6:
+# M6:
 Productions pattern:
+
     - docker-compose up -d 
     (with secrets will still work, but insecurely)
 
@@ -141,7 +142,7 @@ HEALTHCHECK curl http://localhost/ || false
 HEALTHCHECK --timeout=2s --interval=30s --retries=3 \
 CMD curl http://localhost || exit 1
 
-M7:
+# M7:
 CI Pattern:
 - Can set up the registry to rebuild images when code on GitHub changes (need to submit an open-source application),
 - and then notify some CI testing tool about new image so that it can run the tests,
@@ -150,8 +151,8 @@ CI Pattern:
 
 Tags for local registry
 	<local-ip>:<port>/<image-name>
-# Secure private registry: https://training.play-with-docker.com/linux-registry-part2/
-# Auth auth: https://docs.docker.com/registry/deploying/#native-basic-auth
+## Secure private registry: https://training.play-with-docker.com/linux-registry-part2/
+## Auth auth: https://docs.docker.com/registry/deploying/#native-basic-auth
 	Learn more: https://training.play-with-docker.com/
 	- Private registries work out-of-the-box in Swarm (so no need to set up secure connections because routing mesh will call correct node)
 	- Running registry on only 1 node (so when a container crashes, it is recreated on this same node and has access to same data from the volume):
@@ -161,10 +162,10 @@ Example of constraint in a .yml file: https://github.com/dockersamples/example-v
 See images in private registry: 
     <url>:5000/v2/_catalog
 
-M8:
-# Learn: 
+# M8:
+## Learn: 
     - Dockerfile logging with stdout and stderr
-# Do: 
+## Do: 
 	- FROM with specific version
 	- apt-get with specific versions for critical dependencies
     - Set up ENV variables in images (e.g., memory limits)
@@ -176,22 +177,20 @@ M8:
     - Stop docker
         sudo systemctl stop docker.service
 
-# Practices:
+## Practices:
     - Quality of nodes is better than their quantity
         e.g., better to have 5 powerful nodes than 20 slow ones
     - Scaling down is harder
     - Have only odd # of managers
 
-# Softward
+## Softward
     - Jenkins
     - GitHub Actions
     - Image at https://faun.pub/your-team-might-not-need-kubernetes-57240e8d554a
     - Blob storages for persistent volumes
    
-M9:
+# M9:
 - Install multiple kubectl versions
     https://faun.pub/using-different-kubectl-versions-with-multiple-kubernetes-clusters-a3ad8707b87b
 - Configure minikube user
     https://github.com/kubernetes/minikube/issues/7903    
-
-
