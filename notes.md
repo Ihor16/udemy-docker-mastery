@@ -204,4 +204,4 @@ kubectl expose deployment <deployment-name> --port <port>
 kubectl expose deployment <deployment-name> --port <port> --name <service-name> --type (NodePort)
 
 # M10:
-
+kubectl create deployment <name> --image <image> --dry-run -o yaml
