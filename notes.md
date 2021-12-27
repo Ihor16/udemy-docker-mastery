@@ -193,4 +193,15 @@ See images in private registry:
 - Install multiple kubectl versions
     https://faun.pub/using-different-kubectl-versions-with-multiple-kubernetes-clusters-a3ad8707b87b
 - Configure minikube user
-    https://github.com/kubernetes/minikube/issues/7903    
+    https://github.com/kubernetes/minikube/issues/7903
+kubectl create deployment <deployment-name> --image=<image-name>
+kubectl delete deployment <deployment-name>
+kubectl scale deployment <deployment-name> --replicas=<n>
+kubectl logs <pod-name> (-f --tail <n>)
+kubectl describe pod <pod-name>
+
+kubectl expose deployment <deployment-name> --port <port>
+kubectl expose deployment <deployment-name> --port <port> --name <service-name> --type (NodePort)
+
+# M10:
+
