@@ -183,7 +183,7 @@ See images in private registry:
     - Scaling down is harder
     - Have only odd # of managers
 
-## Softward
+## Software
     - Jenkins
     - GitHub Actions
     - Image at https://faun.pub/your-team-might-not-need-kubernetes-57240e8d554a
@@ -209,4 +209,13 @@ kubectl create deployment <name> --image <image> --dry-run -o yaml
 #M11:
 kubectl edit deployment <deployment-name>
 kubectl describe deployment <deployment-name>
+
+#M12:
+kubectl api-resources
+kubectl api-versions
+kubectl explain <resource-type> --recursive
+kubectl explain <resource-type>.spec
+kubectl explain <resource-type>.spec.type
+
+
 
