@@ -205,3 +205,8 @@ kubectl expose deployment <deployment-name> --port <port> --name <service-name> 
 
 # M10:
 kubectl create deployment <name> --image <image> --dry-run -o yaml
+
+#M11:
+kubectl edit deployment <deployment-name>
+kubectl describe deployment <deployment-name>
+
