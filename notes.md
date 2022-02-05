@@ -217,5 +217,14 @@ kubectl explain <resource-type> --recursive
 kubectl explain <resource-type>.spec
 kubectl explain <resource-type>.spec.type
 
+#M18
+https://github.com/BretFisher/ama/issues/17#:~:text=To%20protect%20them%2C%20use%20VPN,root%20user%20in%20the%20container.
+
+- Avoid root inside containers, create a Dockerfile with USER if running a programming language inside a container
+- Scanning, use Trivy: scan image in the CI right after building them.
+The images are very likely to have vulnerabilities, so just decide what's acceptable
+- 
+
+
 
 
