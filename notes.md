@@ -45,6 +45,7 @@ docker run ... -v $(pwd):<path in container>
 # M4:
 docker-compose up
 docker-compose down
+-- Down and remove the volume(s)
 docker-compose down -v
 docker-compose ps
 docker-compose top
@@ -152,10 +153,10 @@ CI Pattern:
 Tags for local registry
 	<local-ip>:<port>/<image-name>
 ## Secure private registry: https://training.play-with-docker.com/linux-registry-part2/
-## Auth auth: https://docs.docker.com/registry/deploying/#native-basic-auth
+## Auth: https://docs.docker.com/registry/deploying/#native-basic-auth
 	Learn more: https://training.play-with-docker.com/
 	- Private registries work out-of-the-box in Swarm (so no need to set up secure connections because routing mesh will call correct node)
-	- Running registry on only 1 node (so when a container crashes, it is recreated on this same node and has access to same data from the volume):
+	- Run registry on only 1 node (so when a container crashes, it is recreated on this same node and has access to same data from the volume):
 	--constraint "node.hostname==<node-name>"
 	--mount type=volume,src=registry_data,dst=/var/list/registry
 Example of constraint in a .yml file: https://github.com/dockersamples/example-voting-app/blob/master/docker-stack.yml
@@ -218,12 +219,32 @@ kubectl explain <resource-type>.spec
 kubectl explain <resource-type>.spec.type
 
 #M18
-https://github.com/BretFisher/ama/issues/17#:~:text=To%20protect%20them%2C%20use%20VPN,root%20user%20in%20the%20container.
+https://github.com/BretFisher/ama/issues/17#issuecomment-400163774
 
 - Avoid root inside containers, create a Dockerfile with USER if running a programming language inside a container
 - Scanning, use Trivy: scan image in the CI right after building them.
 The images are very likely to have vulnerabilities, so just decide what's acceptable
-- 
+
+#M19
+- Buildx:
+    Faster docker bulds
+- Contexts:
+    Use if don't want to ssh into a remote server
+    docker context create --docker "host=ssh://<user>@<ip>" <name>
+    Contexts are specified in the ~/.docker/contexts/meta/
+    Run <command> in all contexts:
+        for c in `docker context ls -q`; do docker -c $c <command>; done
+- Rootless:
+    Expose ports above 1000
+    Try in CI
+
+Exclude lines containing <pattern>
+<command> | grep -v <pattern>
+
+Get System Name & Version:
+hostnamectl
+
+#M20
 
 
 

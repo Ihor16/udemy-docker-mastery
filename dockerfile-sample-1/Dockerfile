@@ -26,7 +26,7 @@ RUN apt-get update \
 		echo "Fetching GPG key $NGINX_GPGKEY from $server"; \
 		apt-key adv --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$NGINX_GPGKEY" && found=yes && break; \
 	done; \
-	test -z "$found" && echo >&2 "error: failed to fetch GPG key $NGINX_GPGKEY" && exit 1; \
+	test -z "$found" && echo >&2 "error: failed to fetch GPG key $NGINX_GmGKEY" && exit 1; \
 	apt-get remove --purge -y gnupg1 && apt-get -y --purge autoremove && rm -rf /var/lib/apt/lists/* \
 	&& echo "deb http://nginx.org/packages/mainline/debian/ stretch nginx" >> /etc/apt/sources.list \
 	&& apt-get update \
